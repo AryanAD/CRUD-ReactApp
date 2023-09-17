@@ -8,22 +8,31 @@
   font-family: "tr larabiefont";
   text-align: center;
   display: flex;
+  width: 100vw;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
 }
 
-.App {
+header {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.display {
+  margin: 40px;
   display: flex;
   flex-flow: column wrap;
+  justify-content: center;
+  width: 500px;
+  height: auto;
 }
 
 .content {
-  width: 300px;
-  height: auto;
   padding: 40px;
   background: navajowhite;
   border: 2px solid indianred;
-  border-radius: 4px;
+  border-radius: 13px
 }
 
 .container {

@@ -1,6 +1,7 @@
 import axios from "./API/axios";
 import { useEffect, useState } from "react";
 import "./index.css";
+import { Link } from "react-router-dom";
 
 const Display = () => {
 	const [myData, setMyData] = useState([]);
@@ -28,28 +29,45 @@ const Display = () => {
 	}, []);
 
 	return (
+		// <div className="display">
+		// 	<button>{<Link to={"/read"} />}BUTTON</button>
+		// 	{isError !== "" && (
+		// 		<h2
+		// 			style={{
+		// 				color: "red",
+		// 				fontSize: "28px",
+		// 				fontWeight: "bold",
+		// 				display: "flex",
+		// 			}}>
+		// 			{isError.toUpperCase()}
+		// 		</h2>
+		// 	)}
+		// 	{myData.map((post) => {
+		// 		const { id, name, contact, email } = post;
+		// 		return (
+		// 			<div className="content" key={id}>
+		// 				<h2>{name.toUpperCase()}</h2>
+		// 				<p>{email}</p>
+		// 				<p>{contact}</p>
+		// 			</div>
+		// 		);
+		// 	})}
+		// </div>
 		<>
-			{isError !== "" && (
-				<h2
-					style={{
-						color: "red",
-						fontSize: "28px",
-						fontWeight: "bold",
-						display: "flex",
-					}}>
-					{isError.toUpperCase()}
-				</h2>
-			)}
-			{myData.map((post) => {
-				const { id, name, contact, email } = post;
-				return (
-					<div className="content" key={id}>
-						<h2>{name.toUpperCase()}</h2>
-						<p>{email}</p>
-						<p>{contact}</p>
-					</div>
-				);
-			})}
+			<table>
+				<tr>
+					<td>ID</td>
+				</tr>
+				<tr>
+					<td>Name</td>
+				</tr>
+				<tr>
+					<td>Phone</td>
+				</tr>
+				<tr>
+					<td>Email</td>
+				</tr>
+			</table>
 		</>
 	);
 };
