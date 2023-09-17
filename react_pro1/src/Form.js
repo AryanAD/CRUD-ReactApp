@@ -2,7 +2,7 @@ import React from "react";
 
 const Form = () => {
 	return (
-		<div>
+		<>
 			<div class="container">
 				<form id="contact" action="" method="post">
 					<h3>Add Data</h3>
@@ -32,20 +32,6 @@ const Form = () => {
 						/>
 					</fieldset>
 					<fieldset>
-						<input
-							placeholder="Your Web Site starts with http://"
-							type="url"
-							tabIndex="4"
-							required
-						/>
-					</fieldset>
-					<fieldset>
-						<textarea
-							placeholder="Type your Message Here...."
-							tabIndex="5"
-							required></textarea>
-					</fieldset>
-					<fieldset>
 						<button
 							name="submit"
 							type="submit"
@@ -56,7 +42,7 @@ const Form = () => {
 					</fieldset>
 				</form>
 			</div>
-		</div>
+		</>
 	);
 };
 

@@ -25,3 +25,50 @@
   border: 2px solid indianred;
   border-radius: 4px;
 }
+
+.container {
+  width: 30vw;
+  height: auto;
+}
+
+
+#contact {
+  background: white;
+  margin: 20px;
+  padding: auto 20px;
+}
+
+#contact h3 {
+  font-size: 3rem;
+  color: crimson;
+}
+
+#contact fieldset {
+  outline: none;
+  height: 50px;
+  display: flex;
+  border: none;
+}
+
+#contact input {
+  width: 100%;
+  outline: none;
+  display: flex;
+  padding: 0 15px;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 22px;
+  border-radius: 9px;
+}
+
+
+#contact button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 18px;
+  width: 60%;
+  font-size: 2rem;
+  cursor: pointer;
+
+}

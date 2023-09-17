@@ -41,18 +41,15 @@ const Display = () => {
 				</h2>
 			)}
 			{myData.map((post) => {
-				const { id, name, createdAt, contact, email, avatar } = post;
+				const { id, name, contact, email } = post;
 				return (
 					<div className="content" key={id}>
-						<img src={avatar} alt="avatar" />
 						<h2>{name.toUpperCase()}</h2>
 						<p>{email}</p>
-						<p>{createdAt}</p>
 						<p>{contact}</p>
 					</div>
 				);
 			})}
-			;
 		</>
 	);
 };
