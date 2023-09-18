@@ -6,12 +6,9 @@
 
 #root {
   font-family: "tr larabiefont";
-  text-align: center;
+  margin: 25px;
   display: flex;
-  width: 100vw;
-  flex-flow: column;
   justify-content: center;
-  align-items: center;
 }
 
 header {
@@ -19,27 +16,10 @@ header {
   text-align: center;
 }
 
-.display {
-  margin: 40px;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  width: 500px;
-  height: auto;
-}
-
-.content {
-  padding: 40px;
-  background: navajowhite;
-  border: 2px solid indianred;
-  border-radius: 13px
-}
-
 .container {
   width: 30vw;
   height: auto;
 }
-
 
 #contact {
   background: white;
@@ -70,7 +50,6 @@ header {
   border-radius: 9px;
 }
 
-
 #contact button {
   display: flex;
   align-items: center;
@@ -80,4 +59,28 @@ header {
   font-size: 2rem;
   cursor: pointer;
 
+}
+
+table {
+
+  border-collapse: collapse;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background: whitesmoke;
+}
+
+table th,
+table td {
+  font-size: 22px;
+  border: 1px solid black;
+  padding: 9px;
 }

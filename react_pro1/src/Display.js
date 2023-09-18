@@ -30,7 +30,6 @@ const Display = () => {
 
 	return (
 		// <div className="display">
-		// 	<button>{<Link to={"/read"} />}BUTTON</button>
 		// 	{isError !== "" && (
 		// 		<h2
 		// 			style={{
@@ -54,19 +53,25 @@ const Display = () => {
 		// 	})}
 		// </div>
 		<>
+			<Link to={"/read"} />
 			<table>
 				<tr>
-					<td>ID</td>
+					<th>ID</th>
+					<th>NAME</th>
+					<th>CONTACT</th>
+					<th>EMAIL</th>
 				</tr>
-				<tr>
-					<td>Name</td>
-				</tr>
-				<tr>
-					<td>Phone</td>
-				</tr>
-				<tr>
-					<td>Email</td>
-				</tr>
+				{myData.map((post) => {
+					const { id, name, contact, email } = post;
+					return (
+						<tr>
+							<td>{id}</td>
+							<td>{name}</td>
+							<td>{contact}</td>
+							<td>{email}</td>
+						</tr>
+					);
+				})}
 			</table>
 		</>
 	);
