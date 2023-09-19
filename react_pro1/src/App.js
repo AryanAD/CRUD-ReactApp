@@ -1,15 +1,29 @@
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import Home from "./pages/Home";
-import Add from "./pages/Add";
-import { useState } from "react";
+import Home from "./components/Home";
+import { useState, useEffect } from "react";
 import API from "./API/axios";
 import { format } from "date-fns";
+import Nav from "./Nav";
+import PostPage from "./components/PostPage";
+import NewPost from "./components/NewPost";
 
 function App() {
 	const [postTitle, setPostTitle] = useState("");
+	const [searchResults, setSearchResults] = useState([]);
+	const [search, setSearch] = useState("");
 	const [postBody, setPostBody] = useState("");
 	const [posts, setPosts] = useState(API);
 	const nav = useNavigate();
+
+	useEffect(() => {
+		const filteredResults = posts.filter(
+			(post) =>
+				post.body.toLowerCase().includes(search.toLowerCase()) ||
+				post.title.toLowerCase().includes(search.toLowerCase())
+		);
+
+		setSearchResults(filteredResults.reverse());
+	}, [posts, search]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -30,12 +44,36 @@ function App() {
 	};
 	return (
 		<>
+			<Routes>
+				<Route path="/" element={<Nav search={search} setSearch={setSearch} />}>
+					<Route index element={<Home posts={searchResults} />} />
+					<Route path="post">
+						<Route
+							index
+							element={
+								<NewPost
+									handleSubmit={handleSubmit}
+									postTitle={postTitle}
+									setPostTitle={setPostTitle}
+									postBody={postBody}
+									setPostBody={setPostBody}
+								/>
+							}
+						/>
+						<Route
+							path=":id"
+							element={<PostPage posts={posts} handleDelete={handleDelete} />}
+						/>
+					</Route>
+				</Route>
+			</Routes>
+
 			<Link to="/">HOME</Link>
 			<Link to="/add"> ADD DATA</Link>
 
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/add" element={<Add />} />
+				<Route path="/add" element={<NewPost />} />
 			</Routes>
 		</>
 	);

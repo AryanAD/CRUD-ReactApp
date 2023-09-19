@@ -1,11 +1,11 @@
 import React from "react";
 import Nav from "../Nav";
 
-const Home = () => {
+const Home = ({ search, setSearch }) => {
 	return (
 		<h1>
 			Homepage(display)
-			<Nav />
+			<Nav search={search} setSearch={setSearch} />
 		</h1>
 	);
 };
