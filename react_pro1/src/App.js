@@ -1,29 +1,18 @@
-import Display from "./Display";
-import Form from "./Form";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from "./Home";
+import { Link, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Add from "./pages/Add";
 
 function App() {
-	const home = () => {
-		return (
-			<BrowserRouter>
-				<Routes>
-					<Route path="/read/:idgenshin" element={<Home />}></Route>
-				</Routes>
-			</BrowserRouter>
-		);
-	};
 	return (
-			<Routes>
-				<Route path="/" element={<Home />}></Route>
-				<Route path="/create" element={<Form />}></Route>
-				<Route path="/edit/:id" element={<Form />}></Route>
-			</Routes>
+		<>
+			<Link to="/">HOME</Link>
+			<Link to="/add"> ADD DATA</Link>
 
 			<Routes>
-				<Route path="/read/:id" element={<Display />}></Route>
+				<Route path="/" element={<Home />} />
+				<Route path="/add" element={<Add />} />
 			</Routes>
-			<button onClick={home}>Home</button>
+		</>
 	);
 }
 
