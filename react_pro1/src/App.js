@@ -14,7 +14,6 @@ function App() {
 		);
 	};
 	return (
-		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Home />}></Route>
 				<Route path="/create" element={<Form />}></Route>
@@ -25,7 +24,6 @@ function App() {
 				<Route path="/read/:id" element={<Display />}></Route>
 			</Routes>
 			<button onClick={home}>Home</button>
-		</BrowserRouter>
 	);
 }
 
