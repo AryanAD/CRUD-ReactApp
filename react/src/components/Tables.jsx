@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import "./Table.css";
 import axios from "axios";
-import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
+// import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
+// import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-const Table = () => {
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+const Tables = () => {
 	const [myData, setMyData] = useState([]);
 
 	const fetchMyData = async () => {
@@ -47,52 +50,82 @@ const Table = () => {
 
 	return (
 		<>
-			<Paper sx={{ width: "100%", overflow: "hidden" }}>
-				<TableContainer sx={{ maxHeight: 440 }}>
+			<Paper sx={{ width: "80%" }}>
+				<TableContainer sx={{}}>
 					<Table
 						stickyHeader
 						aria-label="sticky table">
 						<TableHead>
 							<TableRow>
-								{columns.map((column) => (
+								{/* {columns.map((column) => (
 									<TableCell
 										key={column.id}
 										align={column.align}
 										style={{ minWidth: column.minWidth }}>
 										{column.label}
 									</TableCell>
-								))}
+								))} */}
+								<TableCell>ID</TableCell>
+								<TableCell>NAME</TableCell>
+								<TableCell>CONTACT</TableCell>
+								<TableCell>EMAIL</TableCell>
+								<TableCell>ACTION</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{rows
-								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-								.map((row) => {
-									return (
-										<TableRow
-											hover
-											role="checkbox"
-											tabIndex={-1}
-											key={row.code}>
-											{columns.map((column) => {
-												const value = row[column.id];
-												return (
-													<TableCell
-														key={column.id}
-														align={column.align}>
-														{column.format && typeof value === "number"
-															? column.format(value)
-															: value}
-													</TableCell>
-												);
-											})}
-										</TableRow>
-									);
-								})}
+							{myData.map((data) => {
+								const { id, name, contact, email } = data;
+								return (
+									<TableRow key={id}>
+										<TableCell>{id}</TableCell>
+										<TableCell>{name}</TableCell>
+										<TableCell>{contact}</TableCell>
+										<TableCell>{email}</TableCell>
+										<TableCell>
+											<span className="action">
+												<EditIcon
+													color="success"
+													className="edit-btn"
+													sx={{ cursor: "pointer" }}
+												/>
+												<DeleteIcon
+													sx={{ color: "chocolate", cursor: "pointer" }}
+													className="delete-btn"
+													onClick={() => deleteMyData(id)}
+												/>
+											</span>
+										</TableCell>
+									</TableRow>
+								);
+							})}
+							{/* {rows
+							 	.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+							 	.map((row) => {
+							 		return (
+							 			<TableRow
+							 				hover
+							 				role="checkbox"
+							 				tabIndex={-1}
+							 				key={row.code}>
+							 				{columns.map((column) => {
+							 					const value = row[column.id];
+							 					return (
+							 						<TableCell
+							 							key={column.id}
+							 							align={column.align}>
+							 							{column.format && typeof value === "number"
+							 								? column.format(value)
+							 								: value}
+							 						</TableCell>
+							 					);
+							 				})}
+							 			</TableRow>
+							 		);
+							 	})} */}
 						</TableBody>
 					</Table>
 				</TableContainer>
-				<TablePagination
+				{/* <TablePagination
 					rowsPerPageOptions={[10, 25, 100]}
 					component="div"
 					count={rows.length}
@@ -100,7 +133,7 @@ const Table = () => {
 					page={page}
 					onPageChange={handleChangePage}
 					onRowsPerPageChange={handleChangeRowsPerPage}
-				/>
+				/> */}
 			</Paper>
 
 			{/* <TableContainer>
@@ -142,4 +175,4 @@ const Table = () => {
 	);
 };
 
-export default Table;
+export default Tables;

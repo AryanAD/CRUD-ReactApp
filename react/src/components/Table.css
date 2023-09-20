@@ -1,8 +1,9 @@
-.table-wrapper {
+/* .table-wrapper {
     width: 100%;
 }
 
 .table {
+    height: 80vh;
     display: block;
     overflow: auto;
     table-layout: fixed;
@@ -42,9 +43,12 @@
     width: 100%;
 }
 
+*/
+
 .actions {
+    background: #000;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .actions svg {
