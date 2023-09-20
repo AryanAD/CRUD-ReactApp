@@ -14,38 +14,40 @@ const Table = () => {
 
 	return (
 		<>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>NAME</th>
-					<th>CONTACT</th>
-					<th>EMAIL</th>
-					<th>ACTIONS</th>
-				</tr>
-			</thead>
-			{myData.map((post) => {
-				const { id, name, contact, email } = post;
-				return (
-					<div
-						className="App"
-						key={id}>
-						<tbody>
-							<tr>
-								<td>{id}</td>
-								<td>{name}</td>
-								<td>{contact}</td>
-								<td>{email}</td>
-								<td>
-									<span>
-										<BsFillPencilFill />
-										<BsFillTrashFill />
-									</span>
-								</td>
-							</tr>
-						</tbody>
-					</div>
-				);
-			})}
+			<table className="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>NAME</th>
+						<th>CONTACT</th>
+						<th className="expand">EMAIL</th>
+						<th>ACTIONS</th>
+					</tr>
+				</thead>
+				{myData.map((post) => {
+					const { id, name, contact, email } = post;
+					return (
+						<div
+							className="table-data"
+							key={id}>
+							<tbody>
+								<tr>
+									<td>{id}</td>
+									<td>{name}</td>
+									<td>{contact}</td>
+									<td>{email}</td>
+									<td>
+										<span className="actions">
+											<BsFillPencilFill className="edit-btn" />
+											<BsFillTrashFill className="delete-btn" />
+										</span>
+									</td>
+								</tr>
+							</tbody>
+						</div>
+					);
+				})}
+			</table>
 		</>
 	);
 };
