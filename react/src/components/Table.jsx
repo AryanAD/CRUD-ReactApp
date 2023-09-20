@@ -6,11 +6,37 @@ import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 const Table = () => {
 	const [myData, setMyData] = useState([]);
 
+	const fetchMyData = async () => {
+		try {
+			let response = await axios.get(
+				`https://6506a0c63a38daf4803e8937.mockapi.io/project1/`
+			);
+			setMyData(response.data);
+
+			// const dataList = myData.filter((post) => post.id !== id);
+			// setMyData(dataList);
+		} catch (err) {
+			console.log(`Error: ${err.message}`);
+		}
+	};
+
 	useEffect(() => {
-		axios
-			.get("https://6506a0c63a38daf4803e8937.mockapi.io/project1")
-			.then((res) => setMyData(res.data));
+		fetchMyData();
 	}, []);
+	const deleteMyData = async (id) => {
+		try {
+			console.log(id);
+			let res = await axios.delete(
+				`https://6506a0c63a38daf4803e8937.mockapi.io/project1/${id}`
+			);
+			fetchMyData();
+			console.log(res);
+			// const dataList = myData.filter((post) => post.id !== id);
+			// setMyData(dataList);
+		} catch (err) {
+			console.log(`Error: ${err.message}`);
+		}
+	};
 
 	return (
 		<>
@@ -24,29 +50,28 @@ const Table = () => {
 						<th>ACTIONS</th>
 					</tr>
 				</thead>
-				{myData.map((post) => {
-					const { id, name, contact, email } = post;
-					return (
-						<div
-							className="table-data"
-							key={id}>
-							<tbody>
-								<tr>
-									<td>{id}</td>
-									<td>{name}</td>
-									<td>{contact}</td>
-									<td>{email}</td>
-									<td>
-										<span className="actions">
-											<BsFillPencilFill className="edit-btn" />
-											<BsFillTrashFill className="delete-btn" />
-										</span>
-									</td>
-								</tr>
-							</tbody>
-						</div>
-					);
-				})}
+				<tbody>
+					{myData.map((post) => {
+						const { id, name, contact, email } = post;
+						return (
+							<tr key={id}>
+								<td>{id}</td>
+								<td>{name}</td>
+								<td>{contact}</td>
+								<td>{email}</td>
+								<td>
+									<span className="actions">
+										<BsFillPencilFill className="edit-btn" />
+										<BsFillTrashFill
+											className="delete-btn"
+											onClick={() => deleteMyData(id)}
+										/>
+									</span>
+								</td>
+							</tr>
+						);
+					})}
+				</tbody>
 			</table>
 		</>
 	);

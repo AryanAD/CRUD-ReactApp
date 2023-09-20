@@ -18,6 +18,7 @@
 }
 
 .table thead {
+    text-align: left;
     background-color: rgb(37, 199, 37);
     color: black;
 }

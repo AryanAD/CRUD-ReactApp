@@ -4,16 +4,17 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #faf9f6;
+  background-color: white;
 }
 
 .btn {
-  margin-top: 1rem;
+  /* margin-top:  rem; */
+  font-size: 18px;
   border: none;
-  background-color: #1d4ed8;
-  color: #fff;
+  background-color: green;
+  color: azure;
   padding: 0.5rem 1rem;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
   box-shadow: 0px 5px 5px #ccc;
 }
