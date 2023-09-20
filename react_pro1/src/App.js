@@ -1,18 +1,31 @@
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import { useState, useEffect } from "react";
-import API from "./API/axios";
+import axios from "./API/axios";
 import { format } from "date-fns";
 import Nav from "./Nav";
 import PostPage from "./components/PostPage";
 import NewPost from "./components/NewPost";
 
 function App() {
+	const getApiData = async () => {
+		try {
+			const res = await axios.get("/project1");
+			setPosts(res.data);
+		} catch (err) {
+			console.log(err.message);
+		}
+	};
+
+	useEffect(() => {
+		getApiData();
+	}, []);
+
 	const [postTitle, setPostTitle] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
 	const [search, setSearch] = useState("");
 	const [postBody, setPostBody] = useState("");
-	const [posts, setPosts] = useState(API);
+	const [posts, setPosts] = useState("");
 	const nav = useNavigate();
 
 	useEffect(() => {
@@ -42,6 +55,7 @@ function App() {
 		setPosts(postsList);
 		nav("/");
 	};
+
 	return (
 		<>
 			<Routes>
@@ -61,7 +75,7 @@ function App() {
 							}
 						/>
 						<Route
-							path=":id"
+							path="/post"
 							element={<PostPage posts={posts} handleDelete={handleDelete} />}
 						/>
 					</Route>
