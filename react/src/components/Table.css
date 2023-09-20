@@ -4,7 +4,7 @@
 
 .table {
     display: block;
-    overflow: hidden;
+    overflow: auto;
     table-layout: fixed;
     border-collapse: collapse;
     box-shadow: 0px 10px 10px #ccc;
@@ -14,7 +14,7 @@
     max-width: 80%;
     margin: auto;
     table-layout: auto;
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 
 .table thead {
