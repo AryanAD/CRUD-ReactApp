@@ -2,7 +2,6 @@ import React from "react";
 import {
 	AppBar,
 	Box,
-	Button,
 	CssBaseline,
 	Divider,
 	Drawer,
@@ -17,7 +16,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 
 const drawerWidth = 240;
-const navItems = ["Home", "Add"];
+// const navItems = ["Home", "Add"];
 
 function Nav(props) {
 	const { window } = props;
@@ -37,16 +36,17 @@ function Nav(props) {
 				MOCK API DATA MANIPULATION
 			</Typography>
 			<Divider />
-			<List>
-				{navItems.map((item) => (
-					<ListItem
-						key={item}
-						disablePadding>
-						<ListItemButton sx={{ textAlign: "center" }}>
-							<ListItemText primary={item} />
-						</ListItemButton>
-					</ListItem>
-				))}
+			<List sx={{ display: "flex" }}>
+				<ListItem>
+					<ListItemButton>
+						<ListItemText>HOME</ListItemText>
+					</ListItemButton>
+				</ListItem>
+				<ListItem>
+					<ListItemButton>
+						<ListItemText>ADD</ListItemText>
+					</ListItemButton>
+				</ListItem>
 			</List>
 		</Box>
 	);
@@ -74,13 +74,18 @@ function Nav(props) {
 						MOCK API DATA MANIPULATION
 					</Typography>
 					<Box sx={{ display: { xs: "none", sm: "block" } }}>
-						{navItems.map((item) => (
-							<Button
-								key={item}
-								sx={{ color: "#fff" }}>
-								{item}
-							</Button>
-						))}
+						<List sx={{ display: "flex" }}>
+							<ListItem>
+								<ListItemButton>
+									<ListItemText>HOME</ListItemText>
+								</ListItemButton>
+							</ListItem>
+							<ListItem>
+								<ListItemButton>
+									<ListItemText>ADD</ListItemText>
+								</ListItemButton>
+							</ListItem>
+						</List>
 					</Box>
 				</Toolbar>
 			</AppBar>

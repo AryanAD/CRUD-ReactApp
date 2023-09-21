@@ -48,6 +48,8 @@ const Tables = () => {
 		}
 	};
 
+	const editMyData = async () => {};
+
 	return (
 		<>
 			<Paper sx={{ width: "80%" }}>
@@ -124,9 +126,9 @@ const Tables = () => {
 												fontSize: "17px",
 											}}>
 											<EditIcon
-												color="success"
+												sx={{ cursor: "pointer", color: "green" }}
 												className="edit-btn"
-												sx={{ cursor: "pointer" }}
+												onClick={() => editMyData(id)}
 											/>
 											<DeleteIcon
 												sx={{ color: "chocolate", cursor: "pointer" }}
