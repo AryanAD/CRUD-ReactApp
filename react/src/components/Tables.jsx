@@ -40,7 +40,19 @@ const Tables = () => {
 		}
 	};
 
-	const editMyData = async () => {};
+	// const editMyData = async (e) => {
+	// 	e.preventDefault();
+	// 	try {
+	// 		let res = await axios.put(
+	// 			`https://6506a0c63a38daf4803e8937.mockapi.io/project1/${e.target.id}`,
+	// 			e.target
+	// 		);
+	// 		fetchMyData();
+	// 		console.log(res);
+	// 	} catch (err) {
+	// 		console.log(`Error: ${err.message}`);
+	// 	}
+	// };
 
 	return (
 		<>
@@ -112,7 +124,7 @@ const Tables = () => {
 											<EditIcon
 												sx={{ cursor: "pointer", color: "green" }}
 												className="edit-btn"
-												onClick={() => editMyData(id)}
+												// onClick={() => editMyData(id)}
 											/>
 											<DeleteIcon
 												sx={{ color: "chocolate", cursor: "pointer" }}
