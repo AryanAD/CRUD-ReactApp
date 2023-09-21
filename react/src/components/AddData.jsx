@@ -28,6 +28,7 @@ const AddData = () => {
 		name: "",
 		contact: "",
 		email: "",
+		image: "",
 	});
 
 	const handleSubmit = async (e) => {
@@ -107,6 +108,21 @@ const AddData = () => {
 								name="email"
 								onChange={(e) =>
 									setFormData({ ...formData, email: e.target.value })
+								}
+							/>
+						</Grid>
+						<Grid
+							item
+							xs={12}>
+							<TextField
+								required
+								fullWidth
+								type="text"
+								id="image"
+								label="Image Link"
+								name="image"
+								onChange={(e) =>
+									setFormData({ ...formData, image: e.target.value })
 								}
 							/>
 						</Grid>
