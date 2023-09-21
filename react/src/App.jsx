@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router";
-import Add from "./components/Add";
+import AddData from "./components/AddData";
 import Nav from "./components/Nav";
 import Tables from "./components/Tables";
 
@@ -15,7 +15,7 @@ const App = () => {
 				/>
 				<Route
 					path="/add"
-					element={<Add />}
+					element={<AddData />}
 				/>
 			</Routes>
 		</div>

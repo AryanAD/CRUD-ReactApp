@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./Table.css";
 import axios from "axios";
 // import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import Paper from "@mui/material/Paper";

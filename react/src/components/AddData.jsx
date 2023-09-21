@@ -7,6 +7,8 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material";
+import axios from "axios";
+import { useState } from "react";
 
 function Copyright(props) {
 	return (
@@ -21,10 +23,28 @@ function Copyright(props) {
 		</Typography>
 	);
 }
+const AddData = () => {
+	const [formData, setFormData] = useState({
+		name: "",
+		contact: "",
+		email: "",
+	});
 
-const Add = () => {
-	const handleSubmit = (event) => {};
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			let res = await axios.post(
+				`https://6506a0c63a38daf4803e8937.mockapi.io/project1/`,
+				formData
+			);
+			e.target.reset();
+			console.log(res.data);
+		} catch (err) {
+			console.log(`Error: ${err.message}`);
+		}
+	};
 
+	console.log(formData);
 	return (
 		<Container
 			component="main"
@@ -55,6 +75,9 @@ const Add = () => {
 								label="Full Name"
 								autoFocus
 								type="name"
+								onChange={(e) =>
+									setFormData({ ...formData, name: e.target.value })
+								}
 							/>
 						</Grid>
 						<Grid
@@ -67,6 +90,9 @@ const Add = () => {
 								label="Phone Number"
 								id="number"
 								type="number"
+								onChange={(e) =>
+									setFormData({ ...formData, contact: e.target.value })
+								}
 							/>
 						</Grid>
 						<Grid
@@ -79,6 +105,9 @@ const Add = () => {
 								id="email"
 								label="Email Address"
 								name="email"
+								onChange={(e) =>
+									setFormData({ ...formData, email: e.target.value })
+								}
 							/>
 						</Grid>
 					</Grid>
@@ -96,4 +125,4 @@ const Add = () => {
 	);
 };
 
-export default Add;
+export default AddData;
