@@ -14,6 +14,7 @@ import {
 	Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 // const navItems = ["Home", "Add"];
@@ -39,12 +40,16 @@ function Nav(props) {
 			<List sx={{ display: "flex" }}>
 				<ListItem>
 					<ListItemButton>
-						<ListItemText>HOME</ListItemText>
+						<Link to={"/"}>
+							<ListItemText>HOME</ListItemText>
+						</Link>
 					</ListItemButton>
 				</ListItem>
 				<ListItem>
 					<ListItemButton>
-						<ListItemText>ADD</ListItemText>
+						<Link to={"/add"}>
+							<ListItemText>ADD</ListItemText>
+						</Link>
 					</ListItemButton>
 				</ListItem>
 			</List>
@@ -77,12 +82,20 @@ function Nav(props) {
 						<List sx={{ display: "flex" }}>
 							<ListItem>
 								<ListItemButton>
-									<ListItemText>HOME</ListItemText>
+									<Link
+										style={{ textDecoration: "none", color: "#FFFFFF" }}
+										to={"/"}>
+										<ListItemText>HOME</ListItemText>
+									</Link>
 								</ListItemButton>
 							</ListItem>
 							<ListItem>
 								<ListItemButton>
-									<ListItemText>ADD</ListItemText>
+									<Link
+										style={{ textDecoration: "none", color: "#FFFFFF" }}
+										to={"/add"}>
+										<ListItemText>ADD</ListItemText>
+									</Link>
 								</ListItemButton>
 							</ListItem>
 						</List>

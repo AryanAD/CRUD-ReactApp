@@ -35,7 +35,7 @@ const Tables = () => {
 
 	const deleteMyData = async (id) => {
 		try {
-			console.log(id);
+			console.log("Deleted Data Number: " + id);
 			let res = await axios.delete(
 				`https://6506a0c63a38daf4803e8937.mockapi.io/project1/${id}`
 			);

@@ -1,13 +1,23 @@
 import "./App.css";
-import { useState } from "react";
-import Tables from "./components/Tables";
+import { Route, Routes } from "react-router";
+import Add from "./components/Add";
 import Nav from "./components/Nav";
+import Tables from "./components/Tables";
 
 const App = () => {
 	return (
 		<div className="App">
 			<Nav />
-			<Tables />
+			<Routes>
+				<Route
+					path="/"
+					element={<Tables />}
+				/>
+				<Route
+					path="/add"
+					element={<Add />}
+				/>
+			</Routes>
 		</div>
 	);
 };
