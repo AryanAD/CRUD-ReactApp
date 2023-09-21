@@ -51,7 +51,7 @@ const Tables = () => {
 	return (
 		<>
 			<Paper sx={{ width: "80%" }}>
-				<TableContainer sx={{}}>
+				<TableContainer sx={{ borderRadius: "7px 7px 4px 4px " }}>
 					<Table
 						stickyHeader
 						aria-label="sticky table">
@@ -65,11 +65,47 @@ const Tables = () => {
 										{column.label}
 									</TableCell>
 								))} */}
-								<TableCell>ID</TableCell>
-								<TableCell>NAME</TableCell>
-								<TableCell>CONTACT</TableCell>
-								<TableCell>EMAIL</TableCell>
-								<TableCell>ACTION</TableCell>
+								<TableCell
+									sx={{
+										bgcolor: "#17c217",
+										fontSize: "18px",
+										fontWeight: "bold",
+									}}>
+									ID
+								</TableCell>
+								<TableCell
+									sx={{
+										bgcolor: "#17c217",
+										fontSize: "18px",
+										fontWeight: "bold",
+									}}>
+									NAME
+								</TableCell>
+								<TableCell
+									sx={{
+										bgcolor: "#17c217",
+										fontSize: "18px",
+										fontWeight: "bold",
+									}}>
+									CONTACT
+								</TableCell>
+								<TableCell
+									sx={{
+										bgcolor: "#17c217",
+										fontSize: "18px",
+										fontWeight: "bold",
+									}}>
+									EMAIL
+								</TableCell>
+								<TableCell
+									sx={{
+										bgcolor: "#17c217",
+										fontSize: "18px",
+										fontWeight: "bold",
+										textAlign: "center",
+									}}>
+									ACTION
+								</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -77,23 +113,26 @@ const Tables = () => {
 								const { id, name, contact, email } = data;
 								return (
 									<TableRow key={id}>
-										<TableCell>{id}</TableCell>
-										<TableCell>{name}</TableCell>
-										<TableCell>{contact}</TableCell>
-										<TableCell>{email}</TableCell>
-										<TableCell>
-											<span className="action">
-												<EditIcon
-													color="success"
-													className="edit-btn"
-													sx={{ cursor: "pointer" }}
-												/>
-												<DeleteIcon
-													sx={{ color: "chocolate", cursor: "pointer" }}
-													className="delete-btn"
-													onClick={() => deleteMyData(id)}
-												/>
-											</span>
+										<TableCell sx={{ fontSize: "17px" }}>{id}</TableCell>
+										<TableCell sx={{ fontSize: "17px" }}>{name}</TableCell>
+										<TableCell sx={{ fontSize: "17px" }}>{contact}</TableCell>
+										<TableCell sx={{ fontSize: "17px" }}>{email}</TableCell>
+										<TableCell
+											sx={{
+												display: "flex",
+												justifyContent: "space-around",
+												fontSize: "17px",
+											}}>
+											<EditIcon
+												color="success"
+												className="edit-btn"
+												sx={{ cursor: "pointer" }}
+											/>
+											<DeleteIcon
+												sx={{ color: "chocolate", cursor: "pointer" }}
+												className="delete-btn"
+												onClick={() => deleteMyData(id)}
+											/>
 										</TableCell>
 									</TableRow>
 								);
