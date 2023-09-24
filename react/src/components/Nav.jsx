@@ -75,7 +75,11 @@ function Nav(props) {
 						variant="h5"
 						component="div"
 						sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
-						MOCK API DATA MANIPULATION
+						<Link
+							style={{ textDecoration: "none", color: "#FFFFFF" }}
+							to={"/"}>
+							MOCK API DATA MANIPULATION
+						</Link>
 					</Typography>
 					<Box sx={{ display: { xs: "none", sm: "block" } }}>
 						<List sx={{ display: "flex" }}>

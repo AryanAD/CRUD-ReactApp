@@ -23,26 +23,34 @@ const EditData = () => {
 		name: "",
 		zip: "",
 		email: "",
-		image: "",
+		avatar: "",
 	});
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		const data = new FormData(e.currentTarget);
+		let dataForm = {
+			name: data.get("name"),
+			avatar: data.get("avatar"),
+			email: data.get("email"),
+			zip: data.get("zip"),
+		};
+
 		try {
 			let res = await axios.put(
 				`https://6506a0c63a38daf4803e8937.mockapi.io/project1/${id}`,
-				formData
+				dataForm
 			);
+			console.log(dataForm);
 			e.target.reset();
 			console.log(res.data);
 		} catch (err) {
 			console.log(`Error: ${err.message}`);
 		}
 		navigate("/");
-		fetchMyData();
 	};
 
-	console.log(formData);
 	return (
 		<Container
 			component="main"
@@ -67,16 +75,13 @@ const EditData = () => {
 							xs={12}>
 							<TextField
 								defaultValue={data.name}
-								name="fullName"
-								required
 								fullWidth
 								id="fullName"
 								label="Full Name"
+								name="name"
 								autoFocus
+								required
 								type="name"
-								onChange={(e) =>
-									setFormData({ ...formData, name: e.target.value })
-								}
 							/>
 						</Grid>
 						<Grid
@@ -84,15 +89,12 @@ const EditData = () => {
 							xs={12}>
 							<TextField
 								defaultValue={data.zip}
-								required
 								fullWidth
-								name="number"
-								label="Phone Number"
 								id="number"
+								label="Zip Code"
+								name="zip"
+								required
 								type="number"
-								onChange={(e) =>
-									setFormData({ ...formData, zip: e.target.value })
-								}
 							/>
 						</Grid>
 						<Grid
@@ -100,15 +102,12 @@ const EditData = () => {
 							xs={12}>
 							<TextField
 								defaultValue={data.email}
-								required
 								fullWidth
-								type="email"
 								id="email"
 								label="Email Address"
 								name="email"
-								onChange={(e) =>
-									setFormData({ ...formData, email: e.target.value })
-								}
+								required
+								type="email"
 							/>
 						</Grid>
 						<Grid
@@ -116,15 +115,12 @@ const EditData = () => {
 							xs={12}>
 							<TextField
 								defaultValue={data.avatar}
-								required
 								fullWidth
-								type="text"
 								id="image"
 								label="Image Link"
-								name="image"
-								onChange={(e) =>
-									setFormData({ ...formData, image: e.target.value })
-								}
+								name="avatar"
+								required
+								type="text"
 							/>
 						</Grid>
 					</Grid>

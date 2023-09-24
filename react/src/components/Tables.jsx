@@ -129,11 +129,9 @@ const Tables = () => {
 													});
 												}}
 												sx={{ cursor: "pointer", color: "green" }}
-												className="edit-btn"
 											/>
 											<DeleteIcon
 												sx={{ color: "chocolate", cursor: "pointer" }}
-												className="delete-btn"
 												onClick={() => deleteMyData(id)}
 											/>
 										</TableCell>

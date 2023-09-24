@@ -88,7 +88,7 @@ const AddData = () => {
 								required
 								fullWidth
 								name="number"
-								label="Phone Number"
+								label="Zip Code"
 								id="number"
 								type="number"
 								onChange={(e) =>
