@@ -26,7 +26,7 @@ function Copyright(props) {
 const AddData = () => {
 	const [formData, setFormData] = useState({
 		name: "",
-		contact: "",
+		zip: "",
 		email: "",
 		image: "",
 	});
@@ -92,7 +92,7 @@ const AddData = () => {
 								id="number"
 								type="number"
 								onChange={(e) =>
-									setFormData({ ...formData, contact: e.target.value })
+									setFormData({ ...formData, zip: e.target.value })
 								}
 							/>
 						</Grid>

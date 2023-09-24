@@ -19,13 +19,13 @@ export default function Data() {
 
 	{
 		myData.map((data) => {
-			const { id, name, contact, email } = data;
+			const { id, name, zip, email } = data;
 
 			return (
 				<Data
 					key={id}
 					name={name}
-					contact={contact}
+					zip={zip}
 					email={email}
 				/>
 			);

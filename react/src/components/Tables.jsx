@@ -9,10 +9,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
 
 const Tables = () => {
+	const navigate = useNavigate();
 	const [myData, setMyData] = useState([]);
 
 	const fetchMyData = async () => {
@@ -36,26 +37,6 @@ const Tables = () => {
 				`https://6506a0c63a38daf4803e8937.mockapi.io/project1/${id}`
 			);
 			fetchMyData();
-			console.log(res);
-		} catch (err) {
-			console.log(`Error: ${err.message}`);
-		}
-	};
-
-	const [updateData, setUpdateData] = useState({
-		id: "",
-		name: "",
-		contact: "",
-		email: "",
-	});
-
-	const editMyData = async (e) => {
-		e.preventDefault();
-		try {
-			let res = await axios.put(
-				`https://6506a0c63a38daf4803e8937.mockapi.io/project1/${id}`,
-				updateData
-			);
 			console.log(res);
 		} catch (err) {
 			console.log(`Error: ${err.message}`);
@@ -93,7 +74,7 @@ const Tables = () => {
 										fontSize: "18px",
 										fontWeight: "bold",
 									}}>
-									CONTACT
+									ZIP CODE
 								</TableCell>
 								<TableCell
 									sx={{
@@ -116,7 +97,7 @@ const Tables = () => {
 						</TableHead>
 						<TableBody>
 							{myData.map((data, i) => {
-								const { id, avatar, name, contact, email } = data;
+								const { id, avatar, name, zip, email } = data;
 								return (
 									<TableRow key={id}>
 										<TableCell sx={{ fontSize: "17px" }}>{i + 1}</TableCell>
@@ -133,7 +114,7 @@ const Tables = () => {
 											/>
 											{name}
 										</TableCell>
-										<TableCell sx={{ fontSize: "17px" }}>{contact}</TableCell>
+										<TableCell sx={{ fontSize: "17px" }}>{zip}</TableCell>
 										<TableCell sx={{ fontSize: "17px" }}>{email}</TableCell>
 										<TableCell
 											sx={{
@@ -141,16 +122,15 @@ const Tables = () => {
 												justifyContent: "space-around",
 												fontSize: "17px",
 											}}>
-											<Link
-												to={{
-													pathname: `/edit/${id}`,
-													state: { data: { data } },
-												}}>
-												<EditIcon
-													sx={{ cursor: "pointer", color: "green" }}
-													className="edit-btn"
-												/>
-											</Link>
+											<EditIcon
+												onClick={() => {
+													navigate(`/edit/${id}`, {
+														state: { data: data },
+													});
+												}}
+												sx={{ cursor: "pointer", color: "green" }}
+												className="edit-btn"
+											/>
 											<DeleteIcon
 												sx={{ color: "chocolate", cursor: "pointer" }}
 												className="delete-btn"

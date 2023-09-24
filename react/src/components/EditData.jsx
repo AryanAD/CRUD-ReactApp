@@ -8,18 +8,20 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
-import { useLocation, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 
 const EditData = () => {
+	const navigate = useNavigate();
+
 	let { id } = useParams();
 
 	const location = useLocation();
-	const data = location.state;
+	const data = location.state.data;
 	console.log(data);
 
 	const [formData, setFormData] = useState({
 		name: "",
-		contact: "",
+		zip: "",
 		email: "",
 		image: "",
 	});
@@ -36,6 +38,8 @@ const EditData = () => {
 		} catch (err) {
 			console.log(`Error: ${err.message}`);
 		}
+		navigate("/");
+		fetchMyData();
 	};
 
 	console.log(formData);
@@ -62,6 +66,7 @@ const EditData = () => {
 							item
 							xs={12}>
 							<TextField
+								defaultValue={data.name}
 								name="fullName"
 								required
 								fullWidth
@@ -78,6 +83,7 @@ const EditData = () => {
 							item
 							xs={12}>
 							<TextField
+								defaultValue={data.zip}
 								required
 								fullWidth
 								name="number"
@@ -85,7 +91,7 @@ const EditData = () => {
 								id="number"
 								type="number"
 								onChange={(e) =>
-									setFormData({ ...formData, contact: e.target.value })
+									setFormData({ ...formData, zip: e.target.value })
 								}
 							/>
 						</Grid>
@@ -93,6 +99,7 @@ const EditData = () => {
 							item
 							xs={12}>
 							<TextField
+								defaultValue={data.email}
 								required
 								fullWidth
 								type="email"
@@ -108,6 +115,7 @@ const EditData = () => {
 							item
 							xs={12}>
 							<TextField
+								defaultValue={data.avatar}
 								required
 								fullWidth
 								type="text"
