@@ -4,6 +4,7 @@ import AddData from "./components/AddData";
 import Nav from "./components/Nav";
 import Tables from "./components/Tables";
 import Cards from "./components/Cards";
+import EditData from "./components/EditData";
 
 const App = () => {
 	return (
@@ -19,8 +20,12 @@ const App = () => {
 					element={<AddData />}
 				/>
 				<Route
-					path="/users/:userId"
+					path="/users/:id"
 					element={<Cards />}
+				/>
+				<Route
+					path="/edit/:id"
+					element={<EditData />}
 				/>
 			</Routes>
 		</div>
