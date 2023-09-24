@@ -1,18 +1,36 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useNavigate } from "react-router-dom";
-import { Avatar } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import {
+	Avatar,
+	TablePagination,
+	TableRow,
+	TableHead,
+	TableContainer,
+	TableCell,
+	TableBody,
+	Table,
+	Paper,
+	CircularProgress,
+	Box,
+	LinearProgress,
+} from "@mui/material";
 
 const Tables = () => {
+	const [page, setPage] = React.useState(0);
+	const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+	const handleChangePage = (event, newPage) => {
+		setPage(newPage);
+	};
+
+	const handleChangeRowsPerPage = (event) => {
+		setRowsPerPage(+event.target.value);
+		setPage(0);
+	};
+
 	const navigate = useNavigate();
 	const [myData, setMyData] = useState([]);
 
@@ -96,51 +114,86 @@ const Tables = () => {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{myData.map((data, i) => {
-								const { id, avatar, name, zip, email } = data;
-								return (
-									<TableRow key={id}>
-										<TableCell sx={{ fontSize: "17px" }}>{i + 1}</TableCell>
-										<TableCell
-											sx={{
-												fontSize: "17px",
-												display: "flex",
-												alignItems: "center",
-												gap: "15px",
-											}}>
-											<Avatar
-												alt={name}
-												src={avatar}
-											/>
-											{name}
-										</TableCell>
-										<TableCell sx={{ fontSize: "17px" }}>{zip}</TableCell>
-										<TableCell sx={{ fontSize: "17px" }}>{email}</TableCell>
-										<TableCell
-											sx={{
-												display: "flex",
-												justifyContent: "space-around",
-												fontSize: "17px",
-											}}>
-											<EditIcon
-												onClick={() => {
-													navigate(`/edit/${id}`, {
-														state: { data: data },
-													});
-												}}
-												sx={{ cursor: "pointer", color: "green" }}
-											/>
-											<DeleteIcon
-												sx={{ color: "chocolate", cursor: "pointer" }}
-												onClick={() => deleteMyData(id)}
-											/>
-										</TableCell>
-									</TableRow>
-								);
-							})}
+							{myData.length === 0 ? (
+								<TableRow>
+									<TableCell
+										colSpan={5}
+										sx={{
+											width: "100%",
+											height: "70vh",
+											display: "flex",
+											ml: 50,
+											alignItems: "center",
+											justifyContent: "center",
+										}}>
+										<CircularProgress
+											color={"success"}
+											size={100}
+										/>
+									</TableCell>
+								</TableRow>
+							) : (
+								myData
+									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+									.map((data) => {
+										const { id, avatar, name, zip, email } = data;
+										return (
+											<TableRow key={id}>
+												<TableCell sx={{ fontSize: "17px" }}>{id}</TableCell>
+												<Link
+													style={{ textDecoration: "none" }}
+													to={`/cards/${id}`}>
+													<TableCell
+														sx={{
+															fontSize: "17px",
+															display: "flex",
+															alignItems: "center",
+															gap: "15px",
+														}}>
+														<Avatar
+															alt={name}
+															src={avatar}
+														/>
+														{name}
+													</TableCell>
+												</Link>
+												<TableCell sx={{ fontSize: "17px" }}>{zip}</TableCell>
+												<TableCell sx={{ fontSize: "17px" }}>{email}</TableCell>
+												<TableCell
+													sx={{
+														display: "flex",
+														justifyContent: "space-around",
+														fontSize: "17px",
+													}}>
+													<EditIcon
+														onClick={() => {
+															navigate(`/edit/${id}`, {
+																state: { data: data },
+															});
+														}}
+														sx={{ cursor: "pointer", color: "green" }}
+													/>
+													<DeleteIcon
+														sx={{ color: "chocolate", cursor: "pointer" }}
+														onClick={() => deleteMyData(id)}
+													/>
+												</TableCell>
+											</TableRow>
+										);
+									})
+							)}
 						</TableBody>
 					</Table>
 				</TableContainer>
+				<TablePagination
+					rowsPerPageOptions={[10, 25, 50]}
+					component="div"
+					count={myData.length}
+					rowsPerPage={rowsPerPage}
+					page={page}
+					onPageChange={handleChangePage}
+					onRowsPerPageChange={handleChangeRowsPerPage}
+				/>
 			</Paper>
 		</>
 	);

@@ -13,6 +13,8 @@ import {
 	Toolbar,
 	Typography,
 } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import AddIcon from "@mui/icons-material/Add";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 
@@ -86,8 +88,15 @@ function Nav(props) {
 							<ListItem>
 								<ListItemButton>
 									<Link
-										style={{ textDecoration: "none", color: "#FFFFFF" }}
+										style={{
+											textDecoration: "none",
+											color: "#FFFFFF",
+											display: "flex",
+											gap: "6px",
+											fontSize: "18px",
+										}}
 										to={"/"}>
+										<HomeIcon />
 										<ListItemText>HOME</ListItemText>
 									</Link>
 								</ListItemButton>
@@ -95,8 +104,15 @@ function Nav(props) {
 							<ListItem>
 								<ListItemButton>
 									<Link
-										style={{ textDecoration: "none", color: "#FFFFFF" }}
+										style={{
+											textDecoration: "none",
+											color: "#FFFFFF",
+											display: "flex",
+											gap: "6px",
+											fontSize: "18px",
+										}}
 										to={"/add"}>
+										<AddIcon />
 										<ListItemText>ADD</ListItemText>
 									</Link>
 								</ListItemButton>
