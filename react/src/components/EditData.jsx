@@ -6,11 +6,14 @@ import {
 	Grid,
 	TextField,
 } from "@mui/material";
+import SaveIcon from "@mui/icons-material/Save";
 import axios from "axios";
-import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
+import { useState } from "react";
 
 const EditData = () => {
+	const [isSubmitting, setIsSubmitting] = useState(false);
+
 	const navigate = useNavigate();
 
 	let { id } = useParams();
@@ -18,13 +21,6 @@ const EditData = () => {
 	const location = useLocation();
 	const data = location.state.data;
 	console.log(data);
-
-	const [formData, setFormData] = useState({
-		name: "",
-		zip: "",
-		email: "",
-		avatar: "",
-	});
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -37,6 +33,8 @@ const EditData = () => {
 			zip: data.get("zip"),
 		};
 
+		setIsSubmitting(true);
+
 		try {
 			let res = await axios.put(
 				`https://6506a0c63a38daf4803e8937.mockapi.io/project1/${id}`,
@@ -48,6 +46,8 @@ const EditData = () => {
 		} catch (err) {
 			console.log(`Error: ${err.message}`);
 		}
+
+		setIsSubmitting(true);
 		navigate("/");
 	};
 
@@ -125,11 +125,13 @@ const EditData = () => {
 						</Grid>
 					</Grid>
 					<Button
+						disabled={isSubmitting}
+						startIcon={<SaveIcon />}
 						type="submit"
 						fullWidth
 						variant="contained"
 						sx={{ mt: 3, mb: 2 }}>
-						Add Data
+						Save Changes
 					</Button>
 				</Box>
 			</Box>

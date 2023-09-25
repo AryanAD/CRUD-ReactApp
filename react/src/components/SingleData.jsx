@@ -1,11 +1,11 @@
 import Typography from "@mui/material/Typography";
-import { Avatar, Box } from "@mui/material";
+import { Avatar, Box, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 export default function SingleData() {
-	const [myData, setMyData] = useState([]);
+	const [myData, setMyData] = useState();
 	let { id } = useParams();
 
 	const fetchMyData = async (id) => {
@@ -23,36 +23,50 @@ export default function SingleData() {
 	}, [id]);
 
 	return (
-		<Box
-			sx={{
-				width: "100%",
-				height: "89vh",
-				display: "flex",
-				alignItems: "center",
-				flexFlow: "column",
-			}}>
-			<Avatar
-				sx={{ width: "320px", height: "320px" }}
-				src={myData.avatar}
-				alt={myData.name}
-			/>
-			<Box>
-				<Typography
-					align="center"
-					gutterBottom
-					variant="h2"
-					component="div">
-					{myData.name}
-				</Typography>
-				<Typography
-					align="center"
-					variant="h5"
-					color="text.secondary">
-					Email: {myData.email}
-					<br />
-					Zip Code: {myData.zip}
-				</Typography>
-			</Box>
-		</Box>
+		<>
+			{!myData ? (
+				<CircularProgress
+					size={80}
+					sx={{
+						position: "absolute",
+						top: "20%",
+						left: "50%",
+						transform: "translate(-50%, -50%)",
+					}}
+				/>
+			) : (
+				<Box
+					sx={{
+						width: "100%",
+						height: "89vh",
+						display: "flex",
+						alignItems: "center",
+						flexFlow: "column",
+					}}>
+					<Avatar
+						sx={{ width: "320px", height: "320px" }}
+						src={myData.avatar}
+						alt={myData.name}
+					/>
+					<Box>
+						<Typography
+							align="center"
+							gutterBottom
+							variant="h2"
+							component="div">
+							{myData.name}
+						</Typography>
+						<Typography
+							align="center"
+							variant="h5"
+							color="text.secondary">
+							Email: {myData.email}
+							<br />
+							Zip Code: {myData.zip}
+						</Typography>
+					</Box>
+				</Box>
+			)}
+		</>
 	);
 }

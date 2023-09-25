@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import AddIcon from "@mui/icons-material/Add";
 
 function Copyright(props) {
 	return (
@@ -24,6 +26,9 @@ function Copyright(props) {
 	);
 }
 const AddData = () => {
+	const navigate = useNavigate();
+
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [formData, setFormData] = useState({
 		name: "",
 		zip: "",
@@ -33,6 +38,8 @@ const AddData = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setIsSubmitting(true);
+
 		try {
 			let res = await axios.post(
 				`https://6506a0c63a38daf4803e8937.mockapi.io/project1/`,
@@ -43,6 +50,9 @@ const AddData = () => {
 		} catch (err) {
 			console.log(`Error: ${err.message}`);
 		}
+
+		setIsSubmitting(false);
+		navigate("/");
 	};
 
 	console.log(formData);
@@ -128,6 +138,8 @@ const AddData = () => {
 						</Grid>
 					</Grid>
 					<Button
+						disabled={isSubmitting}
+						startIcon={<AddIcon />}
 						type="submit"
 						fullWidth
 						variant="contained"
