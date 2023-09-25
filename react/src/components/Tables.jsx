@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
 	Avatar,
 	TablePagination,
@@ -14,8 +14,6 @@ import {
 	Table,
 	Paper,
 	CircularProgress,
-	Box,
-	LinearProgress,
 } from "@mui/material";
 
 const Tables = () => {
@@ -140,23 +138,28 @@ const Tables = () => {
 										return (
 											<TableRow key={id}>
 												<TableCell sx={{ fontSize: "17px" }}>{id}</TableCell>
-												<Link
+												{/* <Link
 													style={{ textDecoration: "none" }}
-													to={`/cards/${id}`}>
-													<TableCell
-														sx={{
-															fontSize: "17px",
-															display: "flex",
-															alignItems: "center",
-															gap: "15px",
-														}}>
-														<Avatar
-															alt={name}
-															src={avatar}
-														/>
-														{name}
-													</TableCell>
-												</Link>
+													to={`/cards/${id}`}> */}
+												<TableCell
+													onClick={() => {
+														navigate(`/cards/${id}`, {
+															state: { data: data },
+														});
+													}}
+													sx={{
+														fontSize: "17px",
+														display: "flex",
+														alignItems: "center",
+														gap: "15px",
+													}}>
+													<Avatar
+														alt={name}
+														src={avatar}
+													/>
+													{name}
+												</TableCell>
+												{/* </Link> */}
 												<TableCell sx={{ fontSize: "17px" }}>{zip}</TableCell>
 												<TableCell sx={{ fontSize: "17px" }}>{email}</TableCell>
 												<TableCell

@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router";
 import AddData from "./components/AddData";
 import Nav from "./components/Nav";
 import Tables from "./components/Tables";
-import Cards from "./components/SingleData";
 import EditData from "./components/EditData";
+import SingleData from "./components/SingleData";
 
 const App = () => {
 	return (
@@ -20,12 +20,12 @@ const App = () => {
 					element={<AddData />}
 				/>
 				<Route
-					path="/users/:id"
-					element={<Cards />}
-				/>
-				<Route
 					path="/edit/:id"
 					element={<EditData />}
+				/>
+				<Route
+					path="/cards/:id"
+					element={<SingleData />}
 				/>
 			</Routes>
 		</div>
