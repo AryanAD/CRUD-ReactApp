@@ -134,7 +134,7 @@ const Tables = () => {
 								myData
 									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 									.map((data) => {
-										const { id, avatar, name, zip, email } = data;
+										const { id, image, name, zip, email } = data;
 										return (
 											<TableRow key={id}>
 												<TableCell sx={{ fontSize: "17px" }}>{id}</TableCell>
@@ -155,7 +155,7 @@ const Tables = () => {
 													}}>
 													<Avatar
 														alt={name}
-														src={avatar}
+														src={image}
 													/>
 													{name}
 												</TableCell>

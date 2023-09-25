@@ -28,7 +28,7 @@ const EditData = () => {
 		const data = new FormData(e.currentTarget);
 		let dataForm = {
 			name: data.get("name"),
-			avatar: data.get("avatar"),
+			image: data.get("image"),
 			email: data.get("email"),
 			zip: data.get("zip"),
 		};
@@ -114,11 +114,11 @@ const EditData = () => {
 							item
 							xs={12}>
 							<TextField
-								defaultValue={data.avatar}
+								defaultValue={data.image}
 								fullWidth
 								id="image"
 								label="Image Link"
-								name="avatar"
+								name="image"
 								required
 								type="text"
 							/>

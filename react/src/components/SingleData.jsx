@@ -45,7 +45,7 @@ export default function SingleData() {
 					}}>
 					<Avatar
 						sx={{ width: "320px", height: "320px" }}
-						src={myData.avatar}
+						src={myData.image}
 						alt={myData.name}
 					/>
 					<Box>

@@ -26,9 +26,16 @@ function Copyright(props) {
 	);
 }
 const AddData = () => {
-	const navigate = useNavigate();
-
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const initialErrors = {
+		name: "",
+		zip: "",
+		email: "",
+		image: "",
+	};
+
+	const [formErrors, setFormErrors] = useState(initialErrors);
+
 	const [formData, setFormData] = useState({
 		name: "",
 		zip: "",
@@ -36,23 +43,65 @@ const AddData = () => {
 		image: "",
 	});
 
+	const navigate = useNavigate();
+
+	const validateForm = () => {
+		const errors = {};
+
+		if (!formData.name) {
+			errors.name = "Full Name is required";
+		}
+
+		if (!formData.zip) {
+			errors.zip = "Zip Code is required";
+		} else if (!/^\d{5}$/.test(formData.zip)) {
+			errors.zip = "Zip Code must be 5 digits";
+		}
+
+		if (!formData.email) {
+			errors.email = "Email is required";
+		} else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+			errors.email = "Invalid email address";
+		}
+
+		if (!formData.image) {
+			errors.image = "Image Link is required";
+		} else if (!/^http?:\/\/.*/.test(formData.image)) {
+			errors.image = "Image Link must start with 'http://' or 'https://'";
+		}
+
+		setFormErrors(errors);
+
+		// Return true if there are no errors, indicating the form is valid
+		return Object.keys(errors).length === 0;
+	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setIsSubmitting(true);
 
-		try {
-			let res = await axios.post(
-				`https://6506a0c63a38daf4803e8937.mockapi.io/project1/`,
-				formData
-			);
-			e.target.reset();
-			console.log(res.data);
-		} catch (err) {
-			console.log(`Error: ${err.message}`);
-		}
+		const isFormValid = validateForm();
 
-		setIsSubmitting(false);
-		navigate("/");
+		if (isFormValid) {
+			try {
+				let res = await axios.post(
+					`https://6506a0c63a38daf4803e8937.mockapi.io/project1/`,
+					formData
+				);
+				e.target.reset();
+				console.log(res.data);
+
+				// Clear form errors
+				setFormErrors(initialErrors);
+			} catch (err) {
+				console.log(`Error: ${err.message}`);
+			}
+
+			setIsSubmitting(false);
+			navigate("/");
+		} else {
+			setIsSubmitting(false);
+		}
 	};
 
 	console.log(formData);
@@ -79,23 +128,24 @@ const AddData = () => {
 							item
 							xs={12}>
 							<TextField
-								name="fullName"
-								required
+								name="name"
 								fullWidth
 								id="fullName"
 								label="Full Name"
 								autoFocus
-								type="name"
+								type="text"
 								onChange={(e) =>
 									setFormData({ ...formData, name: e.target.value })
 								}
 							/>
+							<div style={{ color: "red", fontSize: "14px" }}>
+								{formErrors.name}
+							</div>
 						</Grid>
 						<Grid
 							item
 							xs={12}>
 							<TextField
-								required
 								fullWidth
 								name="number"
 								label="Zip Code"
@@ -105,12 +155,14 @@ const AddData = () => {
 									setFormData({ ...formData, zip: e.target.value })
 								}
 							/>
+							<div style={{ color: "red", fontSize: "14px" }}>
+								{formErrors.zip}
+							</div>
 						</Grid>
 						<Grid
 							item
 							xs={12}>
 							<TextField
-								required
 								fullWidth
 								type="email"
 								id="email"
@@ -120,12 +172,14 @@ const AddData = () => {
 									setFormData({ ...formData, email: e.target.value })
 								}
 							/>
+							<div style={{ color: "red", fontSize: "14px" }}>
+								{formErrors.email}
+							</div>
 						</Grid>
 						<Grid
 							item
 							xs={12}>
 							<TextField
-								required
 								fullWidth
 								type="text"
 								id="image"
@@ -135,6 +189,9 @@ const AddData = () => {
 									setFormData({ ...formData, image: e.target.value })
 								}
 							/>
+							<div style={{ color: "red", fontSize: "14px" }}>
+								{formErrors.image}
+							</div>
 						</Grid>
 					</Grid>
 					<Button
