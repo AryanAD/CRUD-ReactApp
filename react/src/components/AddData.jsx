@@ -72,7 +72,6 @@ const AddData = () => {
 
 		setFormErrors(errors);
 
-		// Return true if there are no errors, indicating the form is valid
 		return Object.keys(errors).length === 0;
 	};
 
@@ -90,8 +89,6 @@ const AddData = () => {
 				);
 				e.target.reset();
 				console.log(res.data);
-
-				// Clear form errors
 				setFormErrors(initialErrors);
 			} catch (err) {
 				console.log(`Error: ${err.message}`);
@@ -104,7 +101,6 @@ const AddData = () => {
 		}
 	};
 
-	console.log(formData);
 	return (
 		<Container
 			component="main"

@@ -9,46 +9,97 @@ import {
 import SaveIcon from "@mui/icons-material/Save";
 import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Import useEffect
 
 const EditData = () => {
+	const initialErrors = {
+		name: "",
+		zip: "",
+		email: "",
+		image: "",
+	};
+	const [formErrors, setFormErrors] = useState(initialErrors);
+	const [formData, setFormData] = useState({
+		name: "",
+		zip: "",
+		email: "",
+		image: "",
+	});
+
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const navigate = useNavigate();
-
 	let { id } = useParams();
 
 	const location = useLocation();
 	const data = location.state.data;
-	console.log(data);
+
+	// Use useEffect to set the initial formData with existing data
+	useEffect(() => {
+		if (data) {
+			setFormData({
+				name: data.name || "",
+				zip: data.zip || "",
+				email: data.email || "",
+				image: data.image || "",
+			});
+		}
+	}, [data]);
+
+	const validateForm = () => {
+		const errors = {};
+
+		if (!formData.name) {
+			errors.name = "Full Name is required";
+		}
+
+		if (!formData.zip) {
+			errors.zip = "Zip Code is required";
+		} else if (!/^\d{5}$/.test(formData.zip)) {
+			errors.zip = "Zip Code must be 5 digits";
+		}
+
+		if (!formData.email) {
+			errors.email = "Email is required";
+		} else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+			errors.email = "Invalid email address";
+		}
+
+		if (!formData.image) {
+			errors.image = "Image Link is required";
+		} else if (!/^(https?:\/\/.*)$/.test(formData.image)) {
+			errors.image = "Image Link must start with 'http://' or 'https://'";
+		}
+
+		setFormErrors(errors);
+
+		return Object.keys(errors).length === 0;
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const data = new FormData(e.currentTarget);
-		let dataForm = {
-			name: data.get("name"),
-			image: data.get("image"),
-			email: data.get("email"),
-			zip: data.get("zip"),
-		};
-
 		setIsSubmitting(true);
+		const isFormValid = validateForm();
 
-		try {
-			let res = await axios.put(
-				`https://6506a0c63a38daf4803e8937.mockapi.io/project1/${id}`,
-				dataForm
-			);
-			console.log(dataForm);
-			e.target.reset();
-			console.log(res.data);
-		} catch (err) {
-			console.log(`Error: ${err.message}`);
+		if (isFormValid) {
+			try {
+				let res = await axios.put(
+					`https://6506a0c63a38daf4803e8937.mockapi.io/project1/${id}`,
+					formData
+				);
+				e.target.reset();
+				console.log(res.data);
+				setFormErrors(initialErrors);
+			} catch (err) {
+				console.log(`Error: ${err.message}`);
+			}
+
+			setIsSubmitting(false);
+			navigate("/");
+		} else {
+			setIsSubmitting(false);
 		}
-
-		setIsSubmitting(true);
-		navigate("/");
 	};
 
 	return (
@@ -74,54 +125,74 @@ const EditData = () => {
 							item
 							xs={12}>
 							<TextField
-								defaultValue={data.name}
+								name="name"
 								fullWidth
 								id="fullName"
 								label="Full Name"
-								name="name"
 								autoFocus
-								required
-								type="name"
+								type="text"
+								onChange={(e) =>
+									setFormData({ ...formData, name: e.target.value })
+								}
+								value={formData.name}
 							/>
+							<div style={{ color: "red", fontSize: "14px" }}>
+								{formErrors.name}
+							</div>
 						</Grid>
 						<Grid
 							item
 							xs={12}>
 							<TextField
-								defaultValue={data.zip}
 								fullWidth
-								id="number"
-								label="Zip Code"
 								name="zip"
-								required
-								type="number"
+								label="Zip Code"
+								id="zip"
+								type="text"
+								onChange={(e) =>
+									setFormData({ ...formData, zip: e.target.value })
+								}
+								value={formData.zip}
 							/>
+							<div style={{ color: "red", fontSize: "14px" }}>
+								{formErrors.zip}
+							</div>
 						</Grid>
 						<Grid
 							item
 							xs={12}>
 							<TextField
-								defaultValue={data.email}
 								fullWidth
+								type="email"
 								id="email"
 								label="Email Address"
 								name="email"
-								required
-								type="email"
+								onChange={(e) =>
+									setFormData({ ...formData, email: e.target.value })
+								}
+								value={formData.email}
 							/>
+							<div style={{ color: "red", fontSize: "14px" }}>
+								{formErrors.email}
+							</div>
 						</Grid>
 						<Grid
 							item
 							xs={12}>
 							<TextField
-								defaultValue={data.image}
 								fullWidth
+								type="text"
 								id="image"
 								label="Image Link"
 								name="image"
-								required
-								type="text"
+								onChange={(e) =>
+									setFormData({ ...formData, image: e.target.value })
+								}
+								value={formData.image}
 							/>
+							<div style={{ color: "red", fontSize: "14px" }}>
+								{formErrors.image}
+							</div>
 						</Grid>
 					</Grid>
 					<Button
