@@ -50,6 +50,9 @@ const AddData = () => {
 
 		if (!formData.name) {
 			errors.name = "Full Name is required";
+		} else if (!/^([a-zA-Z]+\s[a-zA-Z]+.*)$/.test(formData.name)) {
+			errors.name =
+				"Full Name must have at least 5 letters separated by a space";
 		}
 
 		if (!formData.zip) {
@@ -66,7 +69,7 @@ const AddData = () => {
 
 		if (!formData.image) {
 			errors.image = "Image Link is required";
-		} else if (!/^http?:\/\/.*/.test(formData.image)) {
+		} else if (!/^(https?:\/\/.*)$/.test(formData.image)) {
 			errors.image = "Image Link must start with 'http://' or 'https://'";
 		}
 
